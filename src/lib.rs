@@ -1,4 +1,4 @@
-// src/lib.rs 
+//! src/lib.rs 
 
 use actix_web::{web, App, HttpResponse, HttpServer};
 use actix_web::dev::Server;
