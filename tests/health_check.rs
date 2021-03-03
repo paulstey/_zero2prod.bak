@@ -37,13 +37,15 @@ async fn subscribe_returns_a_200_for_valide_form_data() {
         .await
         .expect("Failed to execute request.");
 
-        assert_eq!(200, response.status().as_u16());
+    // Assert
+    assert_eq!(200, response.status().as_u16());
 }
 
 
 
 #[actix_rt::test]
 async fn subscribe_returns_a_400_when_data_is_missing() {
+   
     // Arrange 
     let app_address = spawn_app();
     let client = reqwest::Client::new();
@@ -55,6 +57,8 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
     ];
 
     for (invalid_body, error_message) in test_cases {
+        
+        // Act
         let response = client 
             .post(&format!("{}/subscriptions", &app_address))
             .header("Content-Type", "application/x-www-form-urlencoded")
@@ -63,6 +67,7 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
             .await 
             .expect("Failed to execute request.");
         
+        // Assert 
         assert_eq!(
             400,
             response.status().as_u16(),
